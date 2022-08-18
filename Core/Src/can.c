@@ -92,6 +92,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
   /* USER CODE END CAN1_MspInit 1 */
+		
   }
 }
 
@@ -108,10 +109,12 @@ void HAL_CAN_Filter_Config(void){
 	FilterConfig.FilterActivation = ENABLE;
 	FilterConfig.FilterBank = 0;
 
-	  if(HAL_CAN_ConfigFilter(&hcan1, &FilterConfig)!=HAL_OK)
-	  {
-		  Error_Handler();
-	  }
+	if(HAL_CAN_ConfigFilter(&hcan1, &FilterConfig)!=HAL_OK)
+	{
+		Error_Handler();
+	}
+	
+	
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *canHandle){
@@ -257,9 +260,11 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle){
 
 /* USER CODE BEGIN 1 */
 void CAN_Init(void){
-    MX_CAN1_Init();
-    HAL_CAN_Filter_Config();
-    HAL_CAN_MspInit(&hcan1);
+	MX_CAN1_Init();
+	HAL_CAN_Filter_Config();
+	HAL_CAN_MspInit(&hcan1);
+	HAL_CAN_Start(&hcan1);
+	HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
 //		HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
 //		HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
 //		HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);

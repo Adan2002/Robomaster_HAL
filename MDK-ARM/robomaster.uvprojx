@@ -462,6 +462,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f4xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>cal_distance.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\cal_distance.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
